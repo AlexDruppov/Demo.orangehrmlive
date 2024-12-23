@@ -10,7 +10,7 @@ public class DashboardPage implements Locators {
     private String tabTitle = "//div[@class='oxd-topbar-header-title']//h6";
     private String userName = "//p[@class='oxd-userdropdown-name']";
 
-    public void gettabTitleValue(String value){
+    public void checkTabTitle(String value){
         String actualvalue = page.locator(tabTitle).textContent();
         Assertions.assertEquals(value, actualvalue);
         System.out.println(actualvalue);
