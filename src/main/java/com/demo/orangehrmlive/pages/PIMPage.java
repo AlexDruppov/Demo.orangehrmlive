@@ -2,10 +2,6 @@ package com.demo.orangehrmlive.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
-import com.microsoft.playwright.assertions.PlaywrightAssertions;
-import com.microsoft.playwright.options.ElementState;
-import com.microsoft.playwright.options.WaitForSelectorState;
 import org.junit.jupiter.api.Assertions;
 
 public class PIMPage extends BasePage {
@@ -44,7 +40,7 @@ public class PIMPage extends BasePage {
         System.out.println(value);
     }
 
-    public void checkFormValue(String label, String value){
+    public void checkPersonalDetailsValue(String label, String value){
         String actualvalue = page.locator(String.format(inputForm, label)).inputValue();
         Assertions.assertEquals(value, actualvalue);
         System.out.println(actualvalue + " checkFormValue");

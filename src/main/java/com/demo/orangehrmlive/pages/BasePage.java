@@ -1,8 +1,9 @@
 package com.demo.orangehrmlive.pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import org.junit.jupiter.api.Assertions;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,6 +31,12 @@ public class BasePage implements Locators{
     public void logout(){
         page.click(userAccountBtn);
         page.click(logoutBtn);
+    }
+
+    public void checkTableRow(String column, String row){
+        String actualValue = page.locator(String.format(tableRow, column, row)).textContent();
+        Assertions.assertEquals(row, actualValue);
+        System.out.println(actualValue);
     }
 
 

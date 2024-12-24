@@ -11,9 +11,9 @@ public class DashboardPage implements Locators {
     private String userName = "//p[@class='oxd-userdropdown-name']";
 
     public void checkTabTitle(String value){
-        String actualvalue = page.locator(tabTitle).textContent();
-        Assertions.assertEquals(value, actualvalue);
-        System.out.println(actualvalue);
+        String actualValue = page.locator(tabTitle).textContent();
+        Assertions.assertEquals(value, actualValue);
+        System.out.println(actualValue);
         System.out.println(value);
     }
     public void getuserNameValue(String value){
