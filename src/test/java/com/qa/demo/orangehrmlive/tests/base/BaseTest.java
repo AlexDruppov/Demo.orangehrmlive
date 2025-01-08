@@ -3,6 +3,7 @@ package com.qa.demo.orangehrmlive.tests.base;
 import com.demo.orangehrmlive.pages.DashboardPage;
 import com.demo.orangehrmlive.pages.LoginPage;
 import com.demo.orangehrmlive.pages.PIMPage;
+import com.demo.orangehrmlive.pages.RecruitmentPage;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.demo.orangehrmlive.pages.factory.Factory;
@@ -19,6 +20,7 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected DashboardPage dashboardPage;
     protected PIMPage pimPage;
+    protected RecruitmentPage recruitmentPage;
 
 
 

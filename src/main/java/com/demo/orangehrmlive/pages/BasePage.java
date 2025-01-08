@@ -1,14 +1,12 @@
 package com.demo.orangehrmlive.pages;
 
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.Assertions;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class BasePage implements Locators{
-    Page page;
+    protected Page page;
     public BasePage(Page page) {
         this.page = page;
     }
@@ -32,13 +30,22 @@ public class BasePage implements Locators{
         page.click(userAccountBtn);
         page.click(logoutBtn);
     }
-
     public void checkTableRow(String column, String row){
         String actualValue = page.locator(String.format(tableRow, column, row)).textContent();
         Assertions.assertEquals(row, actualValue);
         System.out.println(actualValue);
     }
-
+    public void clickMenuItem(String menuItem) {
+        page.click(String.format(tabMenuItem, menuItem));
+    }
+    public <T extends BasePage> T navigateTo(Class<T> pageClass, String menuItem) {
+        clickMenuItem(menuItem);
+        try {
+            return pageClass.getDeclaredConstructor(Page.class).newInstance(page);
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + pageClass.getName(), e);
+        }
+    }
 
 
 }

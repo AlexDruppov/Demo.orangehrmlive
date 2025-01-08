@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Assertions;
 
 public class PIMPage extends BasePage {
     //label[contains(.,'%s')]/ancestor-or-self::div[@class='oxd-input-group__label-wrapper']//following-sibling::div//input
-    String inputForm = "//div[label[text()='%s']]//following-sibling::div//input";
-
 
     public PIMPage(Page page) {
         super(page);
@@ -36,15 +34,10 @@ public class PIMPage extends BasePage {
         //page.waitForSelector(element, new Page.WaitForSelectorOptions().setState(WaitForSelectorState.VISIBLE));
         String actualvalue = locator.inputValue();
         Assertions.assertEquals(value, actualvalue);
-        System.out.println(actualvalue + " checkUserName");
-        System.out.println(value);
     }
-
     public void checkPersonalDetailsValue(String label, String value){
         String actualvalue = page.locator(String.format(inputForm, label)).inputValue();
         Assertions.assertEquals(value, actualvalue);
-        System.out.println(actualvalue + " checkFormValue");
-        System.out.println(value);
     }
 
 
