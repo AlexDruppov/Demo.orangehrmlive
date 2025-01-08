@@ -59,9 +59,20 @@ public class LoginPageTest extends BaseTest {
         recruitmentPage = dashboardPage.navigateTo(RecruitmentPage.class, "Recruitment");
         recruitmentPage.clickTabMenuItem("Vacancies");
         recruitmentPage.clickBtn("Add");
-        recruitmentPage.fillVacancyInput("Vacancy Name", "Top Vacancy");
-        recruitmentPage.enterJobTitle("Software Engineer");
+        String vacancyName = faker.name().title();
+        System.out.println(vacancyName);
+        recruitmentPage.fillVacancyInput("Vacancy Name", vacancyName);
+        recruitmentPage.enterDropValue("Job Title","Software Engineer");
         recruitmentPage.fillDescription("test");
+        String managerName = recruitmentPage.enterHiringManager("Hiring Manager","Shaheen");
+        System.out.println(managerName);
+        recruitmentPage.clickBtn("Save");
+        recruitmentPage.clickTabMenuItem("Vacancies");
+        recruitmentPage.enterDropValue("Vacancy",vacancyName);
+        recruitmentPage.clickBtn("Search");
+        recruitmentPage.checkTableRow("Vacancy", vacancyName);
+        recruitmentPage.checkTableRow("Hiring Manager", managerName);
+        recruitmentPage.checkTableRow("Job Title", "Software Engineer");
         page.waitForTimeout(5000);
     }
 

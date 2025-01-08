@@ -9,11 +9,17 @@ public class RecruitmentPage extends BasePage {
     public void fillVacancyInput(String type, String value){
         page.fill(String.format(inputForm, type), value);
     }
-    public void enterJobTitle(String value){
-       page.click(dropDawn);
+    public void enterDropValue(String type, String value){
+       page.click(String.format(dropDawn, type));
        page.click(String.format(dropDawnValue, value));
     }
     public void fillDescription(String value){
         page.fill(textArea, value);
+    }
+    public String enterHiringManager(String type, String value){
+        page.fill(String.format(inputForm, type), value);
+        page.click(String.format(dropDawnValue, value));
+        String managerName = page.locator(String.format(inputForm, type)).inputValue().replaceAll("\\s+"," ");
+        return managerName;
     }
 }
