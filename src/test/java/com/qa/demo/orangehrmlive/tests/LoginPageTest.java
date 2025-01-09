@@ -61,9 +61,9 @@ public class LoginPageTest extends BaseTest {
         recruitmentPage.clickBtn("Add");
         String vacancyName = faker.name().title();
         System.out.println(vacancyName);
-        recruitmentPage.fillVacancyInput("Vacancy Name", vacancyName);
+        recruitmentPage.fillRecruitmentPageInput("Vacancy Name", vacancyName);
         recruitmentPage.enterDropValue("Job Title","Software Engineer");
-        recruitmentPage.fillDescription("test");
+        recruitmentPage.fillTextArea("test");
         String managerName = recruitmentPage.enterHiringManager("Hiring Manager","Shaheen");
         System.out.println(managerName);
         recruitmentPage.clickBtn("Save");
@@ -73,7 +73,37 @@ public class LoginPageTest extends BaseTest {
         recruitmentPage.checkTableRow("Vacancy", vacancyName);
         recruitmentPage.checkTableRow("Hiring Manager", managerName);
         recruitmentPage.checkTableRow("Job Title", "Software Engineer");
-        page.waitForTimeout(5000);
+        page.pause();
     }
-
+    @Test
+    public void addCandidate(){
+        login();
+        recruitmentPage = dashboardPage.navigateTo(RecruitmentPage.class, "Recruitment");
+        recruitmentPage.clickBtn("Add");
+        String candidateFirstName = faker.name().firstName();
+        recruitmentPage.fillInput("firstName", candidateFirstName);
+        String candidateLastName = faker.name().lastName();
+        recruitmentPage.fillInput("lastName", candidateLastName);
+        recruitmentPage.enterDropValue("Vacancy", "Senior Support Specialist");
+        recruitmentPage.fillRecruitmentPageInput("Email", "test@maiil.org");
+        String contactNumber = faker.phoneNumber().subscriberNumber();
+        recruitmentPage.fillRecruitmentPageInput("Contact Number", contactNumber);
+        String keywords = recruitmentPage.createUniqueName("Test1, test2, test3");
+        recruitmentPage.fillRecruitmentPageInput("Keywords", keywords);
+        System.out.println(keywords);
+        recruitmentPage.fillTextArea("Notes Enter comma seperated words...");
+        page.pause();
+        String fileName = recruitmentPage.attachFile();
+        recruitmentPage.clickBtn("Save");
+        String candidate = recruitmentPage.copyRecruitmentValue("Name");
+        System.out.println(candidate);
+        recruitmentPage.checkFile(fileName);
+        recruitmentPage.clickTabMenuItem("Candidates");
+        recruitmentPage.fillRecruitmentPageInput("Keywords", keywords);
+        recruitmentPage.clickBtn("Search");
+        page.pause();
+        recruitmentPage.checkTableRow("Vacancy", "Senior Support Specialist");
+        recruitmentPage.checkTableRow("Candidate", candidate);
+        page.pause();
+    }
 }
