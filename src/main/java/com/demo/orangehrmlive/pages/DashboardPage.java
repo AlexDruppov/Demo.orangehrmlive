@@ -11,8 +11,6 @@ public class DashboardPage extends BasePage implements Locators {
     public void checkTabTitle(String value){
         String actualValue = page.locator(tabTitle).textContent();
         Assertions.assertEquals(value, actualValue);
-        System.out.println(actualValue);
-        System.out.println(value);
     }
     public void getUserNameValue(String value){
         String actualvalue = page.locator(userName).textContent();

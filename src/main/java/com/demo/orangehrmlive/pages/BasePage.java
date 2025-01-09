@@ -33,7 +33,6 @@ public class BasePage implements Locators{
     public void checkTableRow(String column, String row){
         String actualValue = page.locator(String.format(tableRow, column, row)).textContent();
         Assertions.assertEquals(row, actualValue);
-        System.out.println(actualValue);
     }
     public void clickMenuItem(String menuItem) {
         page.click(String.format(tabMenuItem, menuItem));

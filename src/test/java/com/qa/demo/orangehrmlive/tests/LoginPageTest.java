@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 public class LoginPageTest extends BaseTest {
     Faker faker = new Faker();
+    private String keywords;
     @Test
     public void login() {
         loginPage.fillInput("username", "Admin");
@@ -44,7 +45,6 @@ public class LoginPageTest extends BaseTest {
         pimPage.fillAddEmployeeInput("Employee Id", userID);
         pimPage.clickBtn("Search");
         pimPage.checkTableRow("Last Name", lastName);
-        page.waitForTimeout(5000);
 
 //        pimPage.logout();
 //        loginPage.fillInput("username", loginName);
@@ -73,7 +73,6 @@ public class LoginPageTest extends BaseTest {
         recruitmentPage.checkTableRow("Vacancy", vacancyName);
         recruitmentPage.checkTableRow("Hiring Manager", managerName);
         recruitmentPage.checkTableRow("Job Title", "Software Engineer");
-        page.pause();
     }
     @Test
     public void addCandidate(){
@@ -88,22 +87,32 @@ public class LoginPageTest extends BaseTest {
         recruitmentPage.fillRecruitmentPageInput("Email", "test@maiil.org");
         String contactNumber = faker.phoneNumber().subscriberNumber();
         recruitmentPage.fillRecruitmentPageInput("Contact Number", contactNumber);
-        String keywords = recruitmentPage.createUniqueName("Test1, test2, test3");
+        keywords = faker.random().hex();
         recruitmentPage.fillRecruitmentPageInput("Keywords", keywords);
-        System.out.println(keywords);
-        recruitmentPage.fillTextArea("Notes Enter comma seperated words...");
-        page.pause();
+        String text = faker.yoda().quote();
+        recruitmentPage.fillTextArea(text);
         String fileName = recruitmentPage.attachFile();
         recruitmentPage.clickBtn("Save");
         String candidate = recruitmentPage.copyRecruitmentValue("Name");
-        System.out.println(candidate);
         recruitmentPage.checkFile(fileName);
         recruitmentPage.clickTabMenuItem("Candidates");
         recruitmentPage.fillRecruitmentPageInput("Keywords", keywords);
         recruitmentPage.clickBtn("Search");
-        page.pause();
         recruitmentPage.checkTableRow("Vacancy", "Senior Support Specialist");
         recruitmentPage.checkTableRow("Candidate", candidate);
+    }
+    @Test
+    public void editCandidateProfile() {
+        addCandidate();
+        recruitmentPage.clickViewProfile();
+    }
+    @Test
+    public void deleteCandidateProfile() {
+        addCandidate();
+        recruitmentPage.clickDeleteProfileBtn();
+        recruitmentPage.fillRecruitmentPageInput("Keywords", keywords);
+        System.out.println(keywords);
+        recruitmentPage.clickBtn("Search");
         page.pause();
     }
 }

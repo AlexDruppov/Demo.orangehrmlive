@@ -14,6 +14,10 @@ public class RecruitmentPage extends BasePage {
     String fileAttachBtn = "//input[@class='oxd-file-input']";
     String fileInput = "//div[@class='oxd-file-input-div']";
     String fileTitle = "//div[@class='orangehrm-file-preview']//p";
+    String viewProfileBtn = "//button//i[@class='oxd-icon bi-eye-fill']";
+    String deleteProfileBtn = "//button//i[@class='oxd-icon bi-trash']";
+    String confirmDeleteBtn = "//button[contains(@class, 'oxd-button--label-danger')]";
+
     public void fillRecruitmentPageInput(String type, String value){
         page.fill(String.format(inputForm, type), value);
     }
@@ -47,5 +51,12 @@ public class RecruitmentPage extends BasePage {
     public void checkFile(String value) {
         String actualValue = page.locator(fileTitle).textContent().trim();
         Assertions.assertEquals(value, actualValue);
+    }
+    public void clickViewProfile(){
+        page.click(viewProfileBtn);
+    }
+    public void clickDeleteProfileBtn(){
+        page.click(deleteProfileBtn);
+        page.click(confirmDeleteBtn);
     }
 }

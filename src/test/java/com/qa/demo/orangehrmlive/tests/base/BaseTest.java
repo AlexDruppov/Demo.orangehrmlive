@@ -7,8 +7,10 @@ import com.demo.orangehrmlive.pages.RecruitmentPage;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.demo.orangehrmlive.pages.factory.Factory;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
-
 import java.util.Properties;
 
 public class BaseTest {
@@ -22,8 +24,6 @@ public class BaseTest {
     protected PIMPage pimPage;
     protected RecruitmentPage recruitmentPage;
 
-
-
     @BeforeTest
     public void setup(){
         factory = new Factory();
@@ -33,8 +33,8 @@ public class BaseTest {
 
 
     }
-//    @AfterTest
-//    public void tearDown(){
-//        page.context().browser().close();
-//    }
+    @AfterClass
+    public void tearDown(){
+        page.context().browser().close();
+    }
 }
