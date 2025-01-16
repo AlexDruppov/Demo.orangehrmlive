@@ -1,8 +1,9 @@
 package com.demo.orangehrmlive.pages;
 
 public interface Locators {
+    String userName = "//span[@class='oxd-userdropdown-tab']/p";
     String input = "//input[@name='%s']";
-    String textArea = "//textarea[contains(@class, 'oxd-textarea')]";
+    String textArea = "//div[label[text()='%s']]//following-sibling::div//textarea";
     String dropDawn = "//div[label[text()='%s']]//following-sibling::div//div[@class='oxd-select-text-input']";
     String dropDawnValue = "//div[@role='option']//span[contains(.,'%s')]";
     String inputForm = "//div[label[text()='%s']]//following-sibling::div//input";

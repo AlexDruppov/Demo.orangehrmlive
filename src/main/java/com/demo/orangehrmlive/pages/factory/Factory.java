@@ -55,18 +55,12 @@ public class Factory {
     }
 
     public Properties init_prop() {
-        FileInputStream ip = null;
-        try {
-            ip = new FileInputStream("./resources/config/resources.properties");
+        try (FileInputStream ip = new FileInputStream("./resources/config/resources.properties")) {
+            properties = new Properties(); properties.load(ip);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        properties = new Properties();
-        try {
-            properties.load(ip);
+            throw new RuntimeException("Properties file not found", e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            throw new RuntimeException("Failed to load properties file", e); }
         return properties;
     }
 }

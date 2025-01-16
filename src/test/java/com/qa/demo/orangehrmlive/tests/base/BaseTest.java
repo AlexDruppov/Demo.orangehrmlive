@@ -7,9 +7,7 @@ import com.demo.orangehrmlive.pages.RecruitmentPage;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.demo.orangehrmlive.pages.factory.Factory;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import java.util.Properties;
 
@@ -30,11 +28,12 @@ public class BaseTest {
         properties = factory.init_prop();
         page = factory.initBrowser(properties);
         loginPage = new LoginPage(page);
-
-
     }
-    @AfterClass
+    @AfterTest
     public void tearDown(){
-        page.context().browser().close();
+//        if (page != null) {
+//            page.context().browser().close();
+//        }
+        page.close();
     }
 }

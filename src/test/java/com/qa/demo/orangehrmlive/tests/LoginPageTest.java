@@ -9,12 +9,14 @@ import org.testng.annotations.Test;
 public class LoginPageTest extends BaseTest {
     Faker faker = new Faker();
     private String keywords;
+    private String userName;
     @Test
     public void login() {
         loginPage.fillInput("username", "Admin");
         loginPage.fillInput("password", "admin123");
         dashboardPage = loginPage.clickLoginBtn("Login");
         dashboardPage.checkTabTitle("Dashboard");
+        userName = dashboardPage.getUserNameValue();
     }
     @Test
     public void createNewUser(){
@@ -63,9 +65,9 @@ public class LoginPageTest extends BaseTest {
         System.out.println(vacancyName);
         recruitmentPage.fillRecruitmentPageInput("Vacancy Name", vacancyName);
         recruitmentPage.enterDropValue("Job Title","Software Engineer");
-        recruitmentPage.fillTextArea("test");
-        String managerName = recruitmentPage.enterHiringManager("Hiring Manager","Shaheen");
-        System.out.println(managerName);
+        page.pause();
+        recruitmentPage.fillTextArea("Description","test");
+        String managerName = recruitmentPage.enterHiringManager("Hiring Manager","Sania");
         recruitmentPage.clickBtn("Save");
         recruitmentPage.clickTabMenuItem("Vacancies");
         recruitmentPage.enterDropValue("Vacancy",vacancyName);
@@ -73,6 +75,17 @@ public class LoginPageTest extends BaseTest {
         recruitmentPage.checkTableRow("Vacancy", vacancyName);
         recruitmentPage.checkTableRow("Hiring Manager", managerName);
         recruitmentPage.checkTableRow("Job Title", "Software Engineer");
+    }
+    @Test
+    public void addDocToVacancy(){
+        addVacancy();
+        recruitmentPage.clickEditVacancyBtn();
+        recruitmentPage.clickBtn("Add");
+        String fileName = recruitmentPage.attachFile();
+        String comment = recruitmentPage.fillTextArea("Comment","Test1");
+        recruitmentPage.saveAttachedFile();
+        recruitmentPage.checkTableRow("File Name", fileName);
+        recruitmentPage.checkTableRow("Comment",comment);
     }
     @Test
     public void addCandidate(){
@@ -89,14 +102,15 @@ public class LoginPageTest extends BaseTest {
         recruitmentPage.fillRecruitmentPageInput("Contact Number", contactNumber);
         keywords = faker.random().hex();
         recruitmentPage.fillRecruitmentPageInput("Keywords", keywords);
-        String text = faker.yoda().quote();
-        recruitmentPage.fillTextArea(text);
+        String text = faker.pokemon().name();
+        recruitmentPage.fillTextArea("Notes",text);
         String fileName = recruitmentPage.attachFile();
         recruitmentPage.clickBtn("Save");
         String candidate = recruitmentPage.copyRecruitmentValue("Name");
         recruitmentPage.checkFile(fileName);
         recruitmentPage.clickTabMenuItem("Candidates");
         recruitmentPage.fillRecruitmentPageInput("Keywords", keywords);
+        System.out.println(keywords);
         recruitmentPage.clickBtn("Search");
         recruitmentPage.checkTableRow("Vacancy", "Senior Support Specialist");
         recruitmentPage.checkTableRow("Candidate", candidate);
@@ -110,9 +124,10 @@ public class LoginPageTest extends BaseTest {
     public void deleteCandidateProfile() {
         addCandidate();
         recruitmentPage.clickDeleteProfileBtn();
+        recruitmentPage.toasterVisibility("Successfully Deleted");
         recruitmentPage.fillRecruitmentPageInput("Keywords", keywords);
-        System.out.println(keywords);
         recruitmentPage.clickBtn("Search");
-        page.pause();
+        recruitmentPage.toasterVisibility("No Records Found");
+
     }
 }

@@ -2,8 +2,6 @@ package com.demo.orangehrmlive.pages;
 
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.Assertions;
-
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class RecruitmentPage extends BasePage {
@@ -14,10 +12,13 @@ public class RecruitmentPage extends BasePage {
     String fileAttachBtn = "//input[@class='oxd-file-input']";
     String fileInput = "//div[@class='oxd-file-input-div']";
     String fileTitle = "//div[@class='orangehrm-file-preview']//p";
-    String viewProfileBtn = "//button//i[@class='oxd-icon bi-eye-fill']";
+    String viewCandidateProfileBtn = "//button//i[@class='oxd-icon bi-eye-fill']";
+    String editVacancyBtn = "//button//i[@class='oxd-icon bi-pencil-fill']";
     String deleteProfileBtn = "//button//i[@class='oxd-icon bi-trash']";
     String confirmDeleteBtn = "//button[contains(@class, 'oxd-button--label-danger')]";
-
+    String attachBlockSaveBtn = "//h6[contains(., 'Add Attachment')]/parent::div//button[contains(.,'Save')]";
+    //String toaster = "//p[@class='oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text']";
+    String toaster = "//p[contains(., '%s')]";
     public void fillRecruitmentPageInput(String type, String value){
         page.fill(String.format(inputForm, type), value);
     }
@@ -25,12 +26,16 @@ public class RecruitmentPage extends BasePage {
        page.click(String.format(dropDawn, type));
        page.click(String.format(dropDawnValue, value));
     }
-    public void fillTextArea(String value){
-        page.fill(textArea, value);
+    public String fillTextArea(String type, String value){
+        page.fill(String.format(textArea, type), value);
+        String text = page.locator(String.format(textArea, type)).inputValue();
+        return text;
     }
     public String enterHiringManager(String type, String value){
-        page.fill(String.format(inputForm, type), value);
-        page.click(String.format(dropDawnValue, value));
+        String first = getFirstWord(value);
+        System.out.println(first);
+        page.fill(String.format(inputForm, type), first);
+        page.click(String.format(dropDawnValue, first));
         String managerName = page.locator(String.format(inputForm, type)).inputValue().replaceAll("\\s+"," ");
         return managerName;
     }
@@ -45,6 +50,7 @@ public class RecruitmentPage extends BasePage {
     }
     public String attachFile(){
         page.setInputFiles(fileAttachBtn, Paths.get("build/file/1596734766622.pdf"));
+        page.locator(fileInput).isVisible();
         String value = page.locator(fileInput).textContent();
         return value;
     }
@@ -53,10 +59,27 @@ public class RecruitmentPage extends BasePage {
         Assertions.assertEquals(value, actualValue);
     }
     public void clickViewProfile(){
-        page.click(viewProfileBtn);
+        page.click(viewCandidateProfileBtn);
     }
     public void clickDeleteProfileBtn(){
         page.click(deleteProfileBtn);
         page.click(confirmDeleteBtn);
+    }
+    public void clickEditVacancyBtn(){
+        page.click(editVacancyBtn);
+    }
+    public String copyFileName(){
+        String name = page.locator(fileInput).textContent().trim();
+        return name;
+    }
+    public void saveAttachedFile(){
+        page.click(attachBlockSaveBtn);
+    }
+    public void toasterVisibility(String value) {
+        page.locator(String.format(toaster, value)).isVisible();
+        //String text = page.locator(toaster).textContent();
+        String text = page.locator(String.format(toaster, value)).textContent();
+        //Assertions.assertEquals(value, text);
+        System.out.println(text);
     }
 }

@@ -45,6 +45,8 @@ public class BasePage implements Locators{
             throw new RuntimeException("Error: " + pageClass.getName(), e);
         }
     }
-
-
+    public String getFirstWord(String value) {
+        String[] words = value.split("\\s+");
+        return words.length > 0 ? words[0] : "";
+    }
 }

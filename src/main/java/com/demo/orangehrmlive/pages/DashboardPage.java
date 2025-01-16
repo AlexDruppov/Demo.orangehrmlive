@@ -7,15 +7,13 @@ public class DashboardPage extends BasePage implements Locators {
         super(page);
     }
     private String tabTitle = "//div[@class='oxd-topbar-header-title']//h6";
-    private String userName = "//p[@class='oxd-userdropdown-name']";
     public void checkTabTitle(String value){
         String actualValue = page.locator(tabTitle).textContent();
         Assertions.assertEquals(value, actualValue);
     }
-    public void getUserNameValue(String value){
-        String actualvalue = page.locator(userName).textContent();
-        Assertions.assertEquals(value, actualvalue);
-        System.out.println(actualvalue);
+    public String getUserNameValue(){
+        String name = page.locator(userName).textContent();
+        return name;
     }
     public PIMPage menuItemClick(String type) {
         page.click(String.format(mainMenuItem, type));
