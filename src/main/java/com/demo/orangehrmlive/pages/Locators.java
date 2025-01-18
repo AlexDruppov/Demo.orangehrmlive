@@ -14,7 +14,7 @@ public interface Locators {
     String userAccountBtn = "//span[@class='oxd-userdropdown-tab']//p";
     String logoutBtn = "//a[contains(., 'Logout')]";
     String tableRow = "//div[text()='%s']/ancestor::div[@class='orangehrm-container']//div[text()='%s']";
-
+    String toaster = "//p[contains(., '%s')]";
 
 
 

@@ -12,8 +12,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import java.util.Properties;
 
-import static constant.Constant.Credentials.PASSWORD;
-import static constant.Constant.Credentials.USERNAME;
+import static com.demo.orangehrmlive.constant.Constant.Credentials.PASSWORD;
+import static com.demo.orangehrmlive.constant.Constant.Credentials.USERNAME;
 
 
 public class BaseTest {

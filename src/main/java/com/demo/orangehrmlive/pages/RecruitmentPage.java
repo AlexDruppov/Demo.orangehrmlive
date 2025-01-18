@@ -14,8 +14,6 @@ public class RecruitmentPage extends BasePage {
     String fileTitle = "//div[@class='orangehrm-file-preview']//p";
     String viewCandidateProfileBtn = "//button//i[@class='oxd-icon bi-eye-fill']";
     String editVacancyBtn = "//button//i[@class='oxd-icon bi-pencil-fill']";
-    String deleteProfileBtn = "//button//i[@class='oxd-icon bi-trash']";
-    String confirmDeleteBtn = "//button[contains(@class, 'oxd-button--label-danger')]";
     String attachBlockSaveBtn = "//h6[contains(., 'Add Attachment')]/parent::div//button[contains(.,'Save')]";
     //String toaster = "//p[@class='oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text']";
     String toaster = "//p[contains(., '%s')]";
@@ -61,10 +59,6 @@ public class RecruitmentPage extends BasePage {
     public void clickViewProfile(){
         page.click(viewCandidateProfileBtn);
     }
-    public void clickDeleteProfileBtn(){
-        page.click(deleteProfileBtn);
-        page.click(confirmDeleteBtn);
-    }
     public void clickEditVacancyBtn(){
         page.click(editVacancyBtn);
     }
@@ -75,9 +69,5 @@ public class RecruitmentPage extends BasePage {
     public void saveAttachedFile(){
         page.click(attachBlockSaveBtn);
     }
-    public void toasterVisibility(String value) {
-        page.locator(String.format(toaster, value)).isVisible();
-//        String text = page.locator(String.format(toaster, value)).textContent();
-//        System.out.println(text);
-    }
+
 }

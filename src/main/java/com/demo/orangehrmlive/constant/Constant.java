@@ -1,4 +1,4 @@
-package constant;
+package com.demo.orangehrmlive.constant;
 
 public class Constant {
     public static class Credentials {

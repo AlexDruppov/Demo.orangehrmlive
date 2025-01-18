@@ -10,6 +10,10 @@ public class BasePage implements Locators{
     public BasePage(Page page) {
         this.page = page;
     }
+    String deleteProfileBtn = "//button//i[@class='oxd-icon bi-trash']";
+    String confirmDeleteBtn = "//button[contains(@class, 'oxd-button--label-danger')]";
+    String toasterItem = "//p[@class='oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text']";
+    String toaster = "//p[contains(., '%s')]";
     public void fillInput(String type, String value) {
         page.fill(String.format(input, type), value);
     }
@@ -48,5 +52,20 @@ public class BasePage implements Locators{
     public String getFirstWord(String value) {
         String[] words = value.split("\\s+");
         return words.length > 0 ? words[0] : "";
+    }
+    public void clickDeleteProfileBtn(){
+        page.click(deleteProfileBtn);
+        page.click(confirmDeleteBtn);
+    }
+    public void noRecordsFoundToaster(){
+        String text = page.locator(toasterItem).textContent();
+        Assertions.assertEquals("No Records Found", text);
+        System.out.println(text);
+    }
+    public void toasterVisibility(String value) {
+        page.locator(String.format(toaster, value)).isVisible();
+        String text = page.locator(String.format(toaster, value)).textContent();
+        Assertions.assertEquals(value, text);
+        System.out.println(text);
     }
 }
