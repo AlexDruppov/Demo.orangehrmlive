@@ -77,9 +77,7 @@ public class RecruitmentPage extends BasePage {
     }
     public void toasterVisibility(String value) {
         page.locator(String.format(toaster, value)).isVisible();
-        //String text = page.locator(toaster).textContent();
-        String text = page.locator(String.format(toaster, value)).textContent();
-        //Assertions.assertEquals(value, text);
-        System.out.println(text);
+//        String text = page.locator(String.format(toaster, value)).textContent();
+//        System.out.println(text);
     }
 }

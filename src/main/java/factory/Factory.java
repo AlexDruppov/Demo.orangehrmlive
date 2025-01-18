@@ -1,4 +1,4 @@
-package com.demo.orangehrmlive.pages.factory;
+package factory;
 
 import com.microsoft.playwright.*;
 
