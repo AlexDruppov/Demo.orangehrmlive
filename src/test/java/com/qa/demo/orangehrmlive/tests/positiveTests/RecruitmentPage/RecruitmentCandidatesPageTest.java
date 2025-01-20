@@ -3,8 +3,7 @@ package com.qa.demo.orangehrmlive.tests.positiveTests.RecruitmentPage;
 import com.demo.orangehrmlive.pages.RecruitmentPage;
 import com.qa.demo.orangehrmlive.tests.base.BaseTest;
 import org.testng.annotations.Test;
-
-public class CandidatesPageTest extends BaseTest {
+public class RecruitmentCandidatesPageTest extends BaseTest {
     @Test
     public void addCandidate(){
         login();

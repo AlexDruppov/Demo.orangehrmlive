@@ -1,10 +1,9 @@
 package com.qa.demo.orangehrmlive.tests.positiveTests.RecruitmentPage;
 
 import com.demo.orangehrmlive.pages.RecruitmentPage;
-import com.github.javafaker.Faker;
 import com.qa.demo.orangehrmlive.tests.base.BaseTest;
 import org.testng.annotations.Test;
-public class VacanciesPageTest extends BaseTest {
+public class RecruitmentVacanciesPageTest extends BaseTest {
     @Test
     public void addVacancy(){
         login();

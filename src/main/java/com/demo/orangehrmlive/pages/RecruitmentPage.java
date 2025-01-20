@@ -18,11 +18,7 @@ public class RecruitmentPage extends BasePage {
     //String toaster = "//p[@class='oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text']";
     String toaster = "//p[contains(., '%s')]";
     public void fillRecruitmentPageInput(String type, String value){
-        page.fill(String.format(inputForm, type), value);
-    }
-    public void enterDropValue(String type, String value){
-       page.click(String.format(dropDawn, type));
-       page.click(String.format(dropDawnValue, value));
+        page.fill(String.format(inputLabelForm, type), value);
     }
     public String fillTextArea(String type, String value){
         page.fill(String.format(textArea, type), value);
@@ -32,13 +28,13 @@ public class RecruitmentPage extends BasePage {
     public String enterHiringManager(String type, String value){
         String first = getFirstWord(value);
         System.out.println(first);
-        page.fill(String.format(inputForm, type), first);
+        page.fill(String.format(inputLabelForm, type), first);
         page.click(String.format(dropDawnValue, first));
-        String managerName = page.locator(String.format(inputForm, type)).inputValue().replaceAll("\\s+"," ");
+        String managerName = page.locator(String.format(inputLabelForm, type)).inputValue().replaceAll("\\s+"," ");
         return managerName;
     }
     public void enterRecruitmentDropInput(String label, String value) {
-        page.fill(String.format(inputForm, label), value);
+        page.fill(String.format(inputLabelForm, label), value);
         page.click(String.format(dropDawnValue, value));
     }
     public String copyRecruitmentValue(String type) {

@@ -21,6 +21,10 @@ public class BasePage implements Locators{
         page.click(String.format(btn, type));
         page.waitForTimeout(1000);
     }
+    public void enterDropValue(String type, String value){
+        page.click(String.format(dropDawn, type));
+        page.click(String.format(dropDawnValue, value));
+    }
     public String createUniqueName(String value) {
         LocalDateTime date = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-ss-SSS");

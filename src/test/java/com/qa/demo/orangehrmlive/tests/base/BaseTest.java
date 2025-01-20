@@ -15,7 +15,6 @@ import java.util.Properties;
 import static com.demo.orangehrmlive.constant.Constant.Credentials.PASSWORD;
 import static com.demo.orangehrmlive.constant.Constant.Credentials.USERNAME;
 
-
 public class BaseTest {
 
     protected Factory factory;
@@ -40,9 +39,9 @@ public class BaseTest {
 
     @AfterTest
     public void tearDown() {
-//        if (page != null) {
-//            page.context().browser().close();
-//        }
+        if (page != null) {
+            page.context().browser().close();
+        }
         page.close();
     }
     public void login() {
@@ -52,5 +51,6 @@ public class BaseTest {
         dashboardPage.checkTabTitle("Dashboard");
         userName = dashboardPage.getUserNameValue();
     }
+
 }
 

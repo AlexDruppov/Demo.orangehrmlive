@@ -6,7 +6,7 @@ public interface Locators {
     String textArea = "//div[label[text()='%s']]//following-sibling::div//textarea";
     String dropDawn = "//div[label[text()='%s']]//following-sibling::div//div[@class='oxd-select-text-input']";
     String dropDawnValue = "//div[@role='option']//span[contains(.,'%s')]";
-    String inputForm = "//div[label[text()='%s']]//following-sibling::div//input";
+    String inputLabelForm = "//div[label[text()='%s']]//following-sibling::div//input";
     String mainMenuItem = "//a[contains(@class, 'oxd-main-menu-item')]//span[contains(.,'%s')]";
     String btn = "//button[contains(.,'%s')]";
     String switchBtn = "//span[contains(@class, 'oxd-switch-input')]";

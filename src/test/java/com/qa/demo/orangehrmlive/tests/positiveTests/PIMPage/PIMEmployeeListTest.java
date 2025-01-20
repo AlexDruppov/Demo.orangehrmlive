@@ -3,8 +3,7 @@ package com.qa.demo.orangehrmlive.tests.positiveTests.PIMPage;
 import com.demo.orangehrmlive.pages.PIMPage;
 import com.qa.demo.orangehrmlive.tests.base.BaseTest;
 import org.testng.annotations.Test;
-
-public class EmployeeListTest extends BaseTest {
+public class PIMEmployeeListTest extends BaseTest {
     @Test
     public void createNewUserFromEmployeeListTab(){
         login();
@@ -15,12 +14,12 @@ public class EmployeeListTest extends BaseTest {
         String lastName = faker.name().lastName();
         pimPage.fillInput("lastName", lastName);
         String id = faker.idNumber().valid();
-        System.out.println(id + " -id");
+        System.out.println(id + " - notUsId");
         pimPage.switchLoginDetails();
         String loginName = pimPage.createUniqueName(firstName);
         System.out.println(loginName);
         pimPage.fillAddEmployeeInput("Username", loginName);
-        String userID = pimPage.fillAddEmployeeInput("Employee Id", "5589");
+        String userID = pimPage.fillAddEmployeeInput("Employee Id", id);
         System.out.println(userID);
         pimPage.fillAddEmployeeInput("Password","Password1");
         pimPage.fillAddEmployeeInput("Confirm Password","Password1");
@@ -30,6 +29,19 @@ public class EmployeeListTest extends BaseTest {
         pimPage.checkUserName("firstName", firstName);
         pimPage.checkUserName("lastName", lastName);
         pimPage.checkPersonalDetailsValue("Employee Id", userID);
+        String otherId = faker.idNumber().valid();
+        System.out.println(otherId + " otherId");
+        pimPage.fillAddEmployeeInput("Other Id", otherId);
+        pimPage.enterDriverLicense("dl-"+otherId);
+        String date = pimPage.calendar("License Expiry Date", "2022", "16", "May");
+        System.out.println(date);
+        String nationality = faker.country().name();
+        pimPage.enterDropValue("Nationality", nationality);
+        System.out.println(nationality);
+        pimPage.enterDropValue("Marital Status", "Other");
+        pimPage.calendar("Date of Birth", "1995", "9", "April");
+
+
         pimPage.clickTabMenuItem("Employee List");
         pimPage.fillAddEmployeeInput("Employee Id", userID);
         pimPage.clickBtn("Search");
@@ -74,6 +86,5 @@ public class EmployeeListTest extends BaseTest {
         pimPage.fillAddEmployeeInput("Employee Id", userID);
         pimPage.clickBtn("Search");
         pimPage.toasterVisibility("No Records Found");
-
     }
 }
