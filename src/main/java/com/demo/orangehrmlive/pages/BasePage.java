@@ -2,6 +2,8 @@ package com.demo.orangehrmlive.pages;
 
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.Assertions;
+
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,7 +20,7 @@ public class BasePage implements Locators{
         page.fill(String.format(input, type), value);
     }
     public void clickBtn(String type) {
-        page.click(String.format(btn, type));
+        page.waitForSelector(String.format(btn, type)).click();
         page.waitForTimeout(1000);
     }
     public void enterDropValue(String type, String value){
@@ -39,7 +41,7 @@ public class BasePage implements Locators{
         page.click(logoutBtn);
     }
     public void checkTableRow(String column, String row){
-        String actualValue = page.locator(String.format(tableRow, column, row)).textContent();
+        String actualValue = page.waitForSelector(String.format(tableRow, column, row)).textContent();
         Assertions.assertEquals(row, actualValue);
     }
     public void clickMenuItem(String menuItem) {
@@ -71,5 +73,26 @@ public class BasePage implements Locators{
         String text = page.locator(String.format(toaster, value)).textContent();
         Assertions.assertEquals(value, text);
         System.out.println(text);
+    }
+    public String attachFile(){
+        page.setInputFiles(fileAttachBtn, Paths.get("build/file/1596734766622.pdf"));
+        page.locator(fileInput).isVisible();
+        String value = page.locator(fileInput).textContent();
+        return value;
+    }
+    public void checkFile(String value) {
+        String actualValue = page.locator(fileTitle).textContent().trim();
+        Assertions.assertEquals(value, actualValue);
+    }
+    public void saveAttachedFile(){
+        page.click(attachBlockSaveBtn);
+    }
+    public void saveCustomFile(){
+        page.click(customBlockSaveBtn);
+    }
+    public String fillTextArea(String type, String value){
+        page.fill(String.format(textArea, type), value);
+        String text = page.locator(String.format(textArea, type)).inputValue();
+        return text;
     }
 }

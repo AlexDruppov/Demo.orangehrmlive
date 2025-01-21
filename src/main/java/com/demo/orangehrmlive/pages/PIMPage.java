@@ -12,8 +12,8 @@ public class PIMPage extends BasePage {
     String yearsItemBtn = "//div[@class='oxd-calendar-selector-year-selected']//p";
     String dayItem = "//div[@class='oxd-calendar-dates-grid']//div[text()='%s']";
     String driverLicense = "//div[label[contains(., 'License Number')]]//following-sibling::div//input";
-
-
+    String maleRadioBtn = "//div[@class='--gender-grouped-field']/div[1]//span";
+    String femaleRadioBtn = "//div[@class='--gender-grouped-field']/div[2]//span";
     public PIMPage(Page page) {
         super(page);
     }
@@ -60,6 +60,12 @@ public class PIMPage extends BasePage {
     public void selectFromDropdown(String button, String item){
         page.click(button);
         page.click(String.format(dropDownSelector, item));
+    }
+    public void maleGender(){
+        page.click(maleRadioBtn);
+    }
+    public void femaleGender(){
+        page.click(femaleRadioBtn);
     }
 
 

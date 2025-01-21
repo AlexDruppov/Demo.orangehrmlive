@@ -35,11 +35,23 @@ public class PIMEmployeeListTest extends BaseTest {
         pimPage.enterDriverLicense("dl-"+otherId);
         String date = pimPage.calendar("License Expiry Date", "2022", "16", "May");
         System.out.println(date);
-        String nationality = faker.country().name();
-        pimPage.enterDropValue("Nationality", nationality);
-        System.out.println(nationality);
+        pimPage.enterDropValue("Nationality", "Mexican");
         pimPage.enterDropValue("Marital Status", "Other");
         pimPage.calendar("Date of Birth", "1995", "9", "April");
+        pimPage.femaleGender();
+        pimPage.clickBtn("Save");
+        pimPage.toasterVisibility("Successfully Updated");
+        pimPage.enterDropValue("Blood Type","AB+");
+        pimPage.saveCustomFile();
+        pimPage.toasterVisibility("Successfully Updated");
+        pimPage.clickBtn("Add");
+        String fileName = pimPage.attachFile();
+        String comment = pimPage.fillTextArea("Comment","Test1");
+        pimPage.saveAttachedFile();
+        pimPage.toasterVisibility("Successfully Saved");
+        pimPage.checkTableRow("File Name", fileName);
+        pimPage.checkTableRow("Description",comment);
+
 
 
         pimPage.clickTabMenuItem("Employee List");

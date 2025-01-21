@@ -9,12 +9,9 @@ public class RecruitmentPage extends BasePage {
         super(page);
     }
     String recruitmentValue = "//div[label[text()='%s']]//following-sibling::div//p";
-    String fileAttachBtn = "//input[@class='oxd-file-input']";
-    String fileInput = "//div[@class='oxd-file-input-div']";
-    String fileTitle = "//div[@class='orangehrm-file-preview']//p";
+
     String viewCandidateProfileBtn = "//button//i[@class='oxd-icon bi-eye-fill']";
     String editVacancyBtn = "//button//i[@class='oxd-icon bi-pencil-fill']";
-    String attachBlockSaveBtn = "//h6[contains(., 'Add Attachment')]/parent::div//button[contains(.,'Save')]";
     //String toaster = "//p[@class='oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text']";
     String toaster = "//p[contains(., '%s')]";
     public void fillRecruitmentPageInput(String type, String value){
@@ -42,16 +39,6 @@ public class RecruitmentPage extends BasePage {
         String value = page.locator(String.format(recruitmentValue, type)).textContent();
         return value;
     }
-    public String attachFile(){
-        page.setInputFiles(fileAttachBtn, Paths.get("build/file/1596734766622.pdf"));
-        page.locator(fileInput).isVisible();
-        String value = page.locator(fileInput).textContent();
-        return value;
-    }
-    public void checkFile(String value) {
-        String actualValue = page.locator(fileTitle).textContent().trim();
-        Assertions.assertEquals(value, actualValue);
-    }
     public void clickViewProfile(){
         page.click(viewCandidateProfileBtn);
     }
@@ -62,8 +49,6 @@ public class RecruitmentPage extends BasePage {
         String name = page.locator(fileInput).textContent().trim();
         return name;
     }
-    public void saveAttachedFile(){
-        page.click(attachBlockSaveBtn);
-    }
+
 
 }

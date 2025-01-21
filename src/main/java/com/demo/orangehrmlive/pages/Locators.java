@@ -15,7 +15,11 @@ public interface Locators {
     String logoutBtn = "//a[contains(., 'Logout')]";
     String tableRow = "//div[text()='%s']/ancestor::div[@class='orangehrm-container']//div[text()='%s']";
     String toaster = "//p[contains(., '%s')]";
-
+    String fileAttachBtn = "//input[@class='oxd-file-input']";
+    String fileInput = "//div[@class='oxd-file-input-div']";
+    String fileTitle = "//div[@class='orangehrm-file-preview']//p";
+    String attachBlockSaveBtn = "//div[@class='orangehrm-attachment']//button[contains(.,'Save')]";
+    String customBlockSaveBtn = "//div[@class='orangehrm-custom-fields']//button[contains(.,'Save')]";
 
 
 

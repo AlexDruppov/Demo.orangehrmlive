@@ -48,7 +48,7 @@ public class Factory {
             default:
                 System.out.println("wrong browser!");
         }
-        browserContext.set(getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(1920,1080)));
+        browserContext.set(getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(1500,800)));
         page.set(getBrowserContext().newPage());
         getPage().navigate(properties.getProperty("url"));
         return getPage();
